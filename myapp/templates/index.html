@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>todo-list</title>
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+        <script src="{% static 'index.js' %}"></script>
+    </head>
+    <body>
+        <h1 style="font-size: 50px;text-align: center;" >{{ request.user.first_name }}'s To-Do List</h1>
+
+    <button class="btn btn-sm btn-outline-primary" id="all" style="font-size: 26px;margin: 10px;">All Tasks</button>
+    <button class="btn btn-sm btn-outline-primary" id="new" style="font-size: 26px;margin: 10px;">New Task</button>
+    <button class="btn btn-sm btn-outline-primary" id="archived" style="font-size: 26px;margin: 10px;">Completed Tasks</button>
+    <a      class="btn btn-sm btn-outline-primary" href="{% url 'logout' %}" style="font-size: 26px;margin: 10px;">Log Out</a>
+    <hr>
+
+    <div id="new-view">
+        <h2 style="font-family: Arial, Helvetica, sans-serif; font-size: 50px; ">Create New Task</h2>
+        <br>
+        <form action="{% url 'new_list' %}" method="post">
+            <div class="form-group">
+                <span class="span1">Task Name:</span>
+                <input class="form-control" type="text" name="name" placeholder="Enter your task name here" style="width: 20%; font-size: 20px;">
+                <br>
+                <span class="span1" >Task Description: </span>
+                <input class="form-control" type="text-area" name="Body" placeholder="Enter your description here" style="width:50%; height: 75px;font-size: 24px;">
+                <br>
+                <span class="span1"  >Due date: </span><input type="date" id="dueDate" class="taskDate" name="duedate" style="font-size: 24px;">
+            </div>
+            {% if message %}
+            <div>{{ message }}</div>
+            {% endif %}
+            <input class="btn btn-primary" type="submit" value="Submit">
+        </form>
+    </div>
+
+    <div id="all-view">
+        <h2 style="font-family: Arial, Helvetica, sans-serif; font-size: 50px; ">All Tasks</h2>
+        
+        {% for cont in conts %}
+        <div  class="posts" id="posts" >
+        <div class="element" id="elements">
+                <span style="float: left;padding-left: 10px; ">Task:<a value="{{cont.name}}" href="{% url 'single_view' cont.name %}"  style="color: black;padding-left: 5px;">{{cont.name}}</a></span>
+                <br>
+                <span style="float: right;padding-right: 10px;">Created :{{cont.created}}</span>
+                <span style="float: left;padding-left: 10px;">Due date:{{cont.due_date |date:'F d Y'}}</span>
+        </div>
+        </div>
+        <br>  
+        {% endfor %}
+    </div>
+
+    <div id="co-view">
+        <h2 style="font-family: Arial, Helvetica, sans-serif; font-size: 50px; ">Completed tasks</h2>
+        {% for cont in conts %}
+        {% if cont.complete %}
+        <div  class="posts" id="posts" >
+        <div class="element" id="element">
+                <span style="float: left;padding-left: 10px; ">Task:<a value="{{cont.name}}" href="{% url 'single_view' cont.name %}"  style="color: black;padding-left: 5px;">{{cont.name}}</a></span>
+                <br>
+                <span style="float: right;padding-right: 10px;">Created :{{cont.created}}</span>
+                <span style="float: left;padding-left: 10px;">Due date:{{cont.due_date |date:'F d Y'}}</span>
+        </div>
+        </div>
+        <br> 
+        {% endif %}
+        {% endfor %}
+    </div>
+
+
+    </body>
+</html>
+
+    

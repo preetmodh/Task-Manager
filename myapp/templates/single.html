@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>todo-list</title>
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    </head>
+    <body>
+        <h1 style="font-size: 50px;text-align: center;" >{{ request.user.first_name }}'s To-Do List</h1>
+
+    <a      class="btn btn-sm btn-outline-primary" href="{% url 'index' %}" style="font-size: 26px;margin: 10px;">All Tasks</a>
+    <a      class="btn btn-sm btn-outline-primary" href="{% url 'logout' %}" style="font-size: 26px;margin: 10px;">Log Out</a>
+    <hr>
+        
+        {% for cont in conts %}
+    <div  class="post" id="post" >
+        <div class="element" id="element">
+                <span >Task:{{cont.name}}</span>
+                <br>
+                <span >Created:{{cont.created}}</span>
+                <br>
+                <span >Due date:{{cont.due_date |date:'F d Y'}}</span>
+                <br>
+                <span >Description:{{cont.body}}</span>
+                <br>
+                {% if cont.complete %}
+                <span >Task Completed: <a href="{% url 'taskn' cont.name %}" style="font-size: 25px; margin-bottom: 8px;">YES</a></span>
+                <br>
+                {% else %}
+                <span >Task Completed:<a href="{% url 'tasky' cont.name %}" style="font-size: 25px; margin-bottom: 8px;">NO</a></span>
+                <br>
+                {% endif %}
+                <span >Delete this task: <a class="btn btn-outline-primary" href="{% url 'delete' cont.name %}" style="font-size: 16px; margin-bottom: 8px;">Delete</a></span>
+                <br>
+
+        </div>
+    </div>
+        <br>    
+        {% endfor %}
+    </body>
+</html>
+
+    

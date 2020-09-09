@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>diary</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <style>
+        body  {
+                background-image:url( "{% static 'images\backg.png' %}");
+        }
+        #card {
+           position: absolute;
+           top: 50%;
+           left: 50%;
+           transform: translate(-50%,-50%);
+        }
+        h1{
+            font-size: 80px;
+        }
+
+        </style>
+    </head>
+    <body>
+        <div id="card">
+        <div class="card-transparent">
+       <h1 style="color: aliceblue; align-items: center;">Sign in</h1>
+</hr>
+    {% if message %}
+    <div style="color: aliceblue; align-items: center;">{{ message }}</div>
+    {% endif %}
+    <form action="{% url 'login' %}" method="post" >
+
+        {% csrf_token %}
+        <div class="form-group">
+            <input autofocus class="form-control" type="email" name="email" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="password" name="password" placeholder="Password">
+        </div>
+        <div class ="form-group" style="padding-left: auto;">
+        <input class="btn btn-primary" type="submit" value="Login">
+        </div>
+    </form>
+    <div style="color: aliceblue; align-items: center;">
+     Don't have an account?<a href="{% url 'register' %}">Sign up here.</a>
+<br>
+<br>
+</br>
+</div>
+</div>
+    </div>
+
+
+    </body>
+</html>
+
+    

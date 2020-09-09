@@ -1,0 +1,40 @@
+h1
+{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
+    text-shadow:2px 2px darkgrey;
+
+}
+    #posts{
+        background-color: lightgreen;
+        border-radius: 25px;
+        width: 98%;
+        height: auto;
+        margin: 10px;
+        font-size: 28px;
+        float: left;
+        display: flexbox;
+
+    }
+    #post{
+        background-color: lightgreen;
+        border-radius: 25px;
+        width: auto;
+        height: auto;
+        margin: 10px;
+        font-size: 28px;
+        float: left;
+        display: flexbox;
+
+    }
+    #element{
+        float: left;
+        padding-left: 10px;
+    }
+    #new-view{
+        margin:10px
+    }
+    .span1{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 26px;
+    }
