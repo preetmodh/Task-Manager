@@ -2,11 +2,13 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>diary</title>
+        <title>sign up</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <style>
         body  {
-            background-image:url( "{% static 'images\backg.png' %}");
+            height: 100vh;
+            background: rgb(88,166,189);
+            background: radial-gradient(circle, rgba(88,166,189,1) 29%, rgba(45,43,221,1) 100%);
         }
         #card {
            position: absolute;
@@ -17,8 +19,34 @@
         h1{
             font-size: 80px;
         }
+        #parent #popup {
+            display: none;
+            }
 
+        #parent:hover #popup {
+            display: block;
+            }
         </style>
+        <script>
+        window.onload = function(){
+            var e = document.getElementById("e");
+            var f = document.getElementById("f");
+            var g = document.getElementById("g");
+            var h = document.getElementById("h");
+e.onclick = function() {
+  document.getElementById('popup').style.display = 'block';
+}
+f.onclick = function() {
+  document.getElementById('popup').style.display = 'none';
+}
+g.onclick = function() {
+  document.getElementById('popup').style.display = 'none';
+}
+h.onclick = function() {
+  document.getElementById('popup').style.display = 'none';
+}
+}
+        </script>
     </head>
     <body>
         <div id="card">
@@ -28,26 +56,34 @@
             {% if message %}
             <div style="color: aliceblue; align-items: center;">{{ message }}</div>
             {% endif %}
-        
+
             <form action="{% url 'register' %}" method="post">
                 {% csrf_token %}
-                <div class="form-group">
+                <div class="form-group" id="h">
                     <input class="form-control" type="text" name="name" placeholder="Username">
                 </div>
-                <div class="form-group">
+                <div class="form-group" id="g">
                     <input class="form-control" type="email" name="email" placeholder="Email Address">
                 </div>
-                <div class="form-group">
-                    <input class="form-control" type="password" name="password" placeholder="Password">
+                <div class="form-group" id="e">
+                    <input class="form-control"  type="password" name="password" placeholder="Password">
                 </div>
+
+                <div id="popup" style="display: none; color:white;">
+                <span style="font-size: 12px">*Password must be atleast 8 char long</span><br>
+                <span style="font-size: 12px">*Username should not appear in password</span><br>
+                <span style="font-size: 12px">*Password should contain an Uppercase letter</span><br>
+                <span style="font-size: 12px">*Password should contain atleast one digit and symbol</span><br>
+                </div>
+
                 <span id="msg"></span>
-                <div class="form-group">
+                <div class="form-group" id="f">
                     <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
                 </div>
                 <input class="btn btn-primary" type="submit" value="Register" id="sub">
             </form>
         <div style="color: aliceblue; align-items: center;">
-            Already have an account? <a href="{% url 'login' %}">Sign in here.</a>
+            Already have an account? <a href="{% url 'login' %}" style="color: rgb(170,245,255);">Sign in here.</a>
         </div>
 </div>
     </div>
