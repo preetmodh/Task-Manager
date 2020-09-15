@@ -22,7 +22,7 @@ def index(request):
 
     # Everyone else is sent to sign in
     else:
-        
+
         return HttpResponseRedirect(reverse("login"))
 
 
@@ -115,14 +115,17 @@ def new_list(request):
             due_date=datetime.now()
         user=request.user
         name=request.POST.get('name',False)
-        content=Content(name=name,body=body,user=user,due_date=due_date)
-        content.save()
-        #conts=Content.objects.order_by("-created").all()
-        conts=Content.objects.order_by("-created").all().filter(user=user)
-        context={
-            "conts":conts,
-        }
-        return render(request, "index.html",context)
+        if (len(list(name))==0 or len(list(body))==0):
+            return HttpResponseRedirect(reverse("index"))
+        else:
+            content=Content(name=name,body=body,user=user,due_date=due_date)
+            content.save()
+            #conts=Content.objects.order_by("-created").all()
+            conts=Content.objects.order_by("-created").all().filter(user=user)
+            context={
+                "conts":conts,
+            }
+            return render(request, "index.html",context)
 
 #for viewing single list
 @csrf_exempt
@@ -139,7 +142,7 @@ def single_view(request,name):
 @csrf_exempt
 @login_required
 def delete(request,name):
-    user=request.user   
+    user=request.user
     Content.objects.all().filter(name=name,user=user).delete()
     return HttpResponseRedirect(reverse("index"))
 
