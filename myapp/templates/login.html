@@ -2,11 +2,13 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>diary</title>
+        <title>login</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <style>
-        body  {
-                background-image:url( "{% static 'images\backg.png' %}");
+        body {
+            height: 100vh;
+            background: rgb(88,166,189);
+            background: radial-gradient(circle, rgba(88,166,189,1) 29%, rgba(45,43,221,1) 100%);
         }
         #card {
            position: absolute;
@@ -42,7 +44,7 @@
         </div>
     </form>
     <div style="color: aliceblue; align-items: center;">
-     Don't have an account?<a href="{% url 'register' %}">Sign up here.</a>
+     Don't have an account?<a href="{% url 'register' %}" style="color: rgb(170,245,255);">Sign up here.</a>
 <br>
 <br>
 </br>
@@ -54,4 +56,3 @@
     </body>
 </html>
 
-    
