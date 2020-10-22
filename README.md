@@ -28,3 +28,4 @@ To visit website [Click Here](https://preetmodh.pythonanywhere.com/login)
    * django contib models
    * django urls
    * django sqlite3
+
