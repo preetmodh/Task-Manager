@@ -16,6 +16,15 @@
            left: 50%;
            transform: translate(-50%,-50%);
         }
+        #contact{
+            padding-left: 5px;
+            position: absolute;
+            top: 100%;
+            font-size: 15px;
+            opacity: 0.5;
+            transform: translate(0,-50%);
+
+        }
         h1{
             font-size: 80px;
         }
@@ -27,67 +36,48 @@
             display: block;
             }
         </style>
-        <script>
-        window.onload = function(){
-            var e = document.getElementById("e");
-            var f = document.getElementById("f");
-            var g = document.getElementById("g");
-            var h = document.getElementById("h");
-e.onclick = function() {
-  document.getElementById('popup').style.display = 'block';
-}
-f.onclick = function() {
-  document.getElementById('popup').style.display = 'none';
-}
-g.onclick = function() {
-  document.getElementById('popup').style.display = 'none';
-}
-h.onclick = function() {
-  document.getElementById('popup').style.display = 'none';
-}
-}
-        </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+        <script src="{% static 'register.js' %}"></script>
     </head>
     <body>
         <div id="card">
         <div class="card-transparent">
             <h1 style="color: aliceblue; align-items: center;">Sign up</h1>
+            {{message}}
 
-            {% if message %}
-            <div style="color: aliceblue; align-items: center;">{{ message }}</div>
-            {% endif %}
-
-            <form action="{% url 'register' %}" method="post">
                 {% csrf_token %}
-                <div class="form-group" id="h">
+                <div class="form-group">
                     <input class="form-control" type="text" name="name" placeholder="Username">
                 </div>
-                <div class="form-group" id="g">
+                <div class="form-group" >
                     <input class="form-control" type="email" name="email" placeholder="Email Address">
                 </div>
-                <div class="form-group" id="e">
+                <div class="form-group" id="pass">
                     <input class="form-control"  type="password" name="password" placeholder="Password">
                 </div>
 
-                <div id="popup" style="display: none; color:white;">
-                <span style="font-size: 12px">*Password must be atleast 8 char long</span><br>
-                <span style="font-size: 12px">*Username should not appear in password</span><br>
-                <span style="font-size: 12px">*Password should contain an Uppercase letter</span><br>
-                <span style="font-size: 12px">*Password should contain atleast one digit and symbol</span><br>
+                <div id="popup" style=" color:white; display: none;">
+                <span style="font-size: 12px; opacity: 0.6;">*Password must be atleast 8 char long</span><br>
+                <span style="font-size: 12px; opacity: 0.6;">*Username should not appear in password</span><br>
+                <span style="font-size: 12px; opacity: 0.6;">*Password should contain an Uppercase letter</span><br>
+                <span style="font-size: 12px; opacity: 0.6;">*Password should contain atleast one digit and symbol</span><br>
                 </div>
 
                 <span id="msg"></span>
                 <div class="form-group" id="f">
                     <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
                 </div>
-                <input class="btn btn-primary" type="submit" value="Register" id="sub">
-            </form>
+                <div id="passc" style="background-color: #ee7979; font-size: 20px; border-radius: 5px; margin-bottom: 12px;">
+                  </div>
+                <input class="btn btn-primary" type="submit" value="Register" id="register">
+
         <div style="color: aliceblue; align-items: center;">
             Already have an account? <a href="{% url 'login' %}" style="color: rgb(170,245,255);">Sign in here.</a>
         </div>
 </div>
     </div>
-
+    <span id="contact">Contact:Preetmodh@gmail.com</span>
 
     </body>
 </html>

@@ -5,7 +5,6 @@
         <title>todo-list</title>
         <link rel="stylesheet" href="{% static 'styles.css' %}">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
         <script src="{% static 'index.js' %}"></script>
     </head>
     <body>
@@ -13,6 +12,7 @@
 
     <button class="btn btn-sm btn-outline-primary" id="all" style="font-size: 26px;margin: 10px;">All Tasks</button>
     <button class="btn btn-sm btn-outline-primary" id="new" style="font-size: 26px;margin: 10px;">New Task</button>
+    <button class="btn btn-sm btn-outline-primary" id="duetasks" style="font-size: 26px;margin: 10px;">Due Tasks</button>
     <button class="btn btn-sm btn-outline-primary" id="archived" style="font-size: 26px;margin: 10px;">Completed Tasks</button>
     <a      class="btn btn-sm btn-outline-primary" href="{% url 'logout' %}" style="font-size: 26px;margin: 10px;">Log Out</a>
     <hr>
@@ -70,6 +70,22 @@
         {% endfor %}
     </div>
 
+    <div id="due-view">
+        <h2 style="font-family: Arial, Helvetica, sans-serif; font-size: 50px; ">Due tasks</h2>
+        {% for cont in conts %}
+        {% if cont.complete is False %}
+        <div  class="posts" id="posts" >
+        <div class="element" id="element">
+                <span style="float: left;padding-left: 10px; ">Task:<a value="{{cont.name}}" href="{% url 'single_view' cont.name %}"  style="color: grey;padding-left: 5px;">{{cont.name}}</a></span>
+                <br>
+                <span style="float: right;padding-right: 10px;">Created :{{cont.created}}</span>
+                <span style="float: left;padding-left: 10px;">Due date:{{cont.due_date |date:'F d Y'}}</span>
+        </div>
+        </div>
+        <br>
+        {% endif %}
+        {% endfor %}
+    </div>
 
     </body>
 </html>

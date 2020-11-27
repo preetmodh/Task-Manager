@@ -6,14 +6,12 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from .models import User,Content
 from datetime import datetime
+import json
 
 def index(request):
 
     # Authenticated users view their diary
     if request.user.is_authenticated:
-        complete=request.POST.getlist('complete')
-        print(complete)
-
         conts=Content.objects.order_by("-created").all().filter(user=request.user)
         context={
             "conts":conts
@@ -29,6 +27,7 @@ def index(request):
 
 
 # for login
+@csrf_exempt
 def login_view(request):
     if request.method == "POST":
         email = request.POST["email"]
@@ -49,34 +48,12 @@ def login_view(request):
 
 
 # for registering new user
+@csrf_exempt
 def register(request):
     if request.method == "POST":
         email = request.POST["email"]
         name  = request.POST["name"]
         password = request.POST["password"]
-        confirmation = request.POST["confirmation"]
-        if password != confirmation:
-            return render(request, "register.html", {
-                "message": "Passwords must match."
-            })
-        if name in password:
-            return render(request, "register.html", {
-                "message": "Username should not appear in password"
-            })
-        if not any(x.isupper() for x in password):
-            return render(request, "register.html", {
-                "message": "Password should contain an Uppercase letter"
-            })
-        if not any(x.isdigit() for x in password):
-            return render(request, "register.html", {
-                "message": "Password should contain atleast one digit"
-            })
-        if set('[!@#$%^&*()_+{}\]+$').intersection(password):
-            pass
-        else:
-            return render(request, "register.html", {
-                "message": "Password should contain atleast one symbol"
-            })
 
 
         # Attempt to create new user
@@ -91,9 +68,12 @@ def register(request):
                 "message": "Email address already taken."
             })
         login(request, user)
-        return HttpResponseRedirect(reverse("index"))
+        response_data = {'success':1}
+        return HttpResponse(json.dumps(response_data), content_type="application/json")
+        
     else:
         return render(request, "register.html")
+
 
 
 
@@ -132,8 +112,10 @@ def new_list(request):
 @login_required
 def single_view(request,name):
         user=request.user
-        conts=Content.objects.order_by("-created").all().filter(name=name,user=user)
+        cont=Content.objects.order_by("-created").all().filter(name=name,user=user)
+        conts=Content.objects.order_by("-created").all().filter(user=request.user)
         context={
+            "cont":cont,
             "conts":conts
         }
         return render(request,"single.html",context)
@@ -154,8 +136,10 @@ def tasky(request,name):
     c.complete=True
     c.save()
     user=request.user
-    conts=Content.objects.order_by("-created").all().filter(name=name,user=user)
+    cont=Content.objects.order_by("-created").all().filter(name=name,user=user)
+    conts=Content.objects.order_by("-created").all().filter(user=request.user)
     context={
+            "cont":cont,
             "conts":conts
         }
     return render(request,"single.html",context)
@@ -169,8 +153,10 @@ def taskn(request,name):
     c.complete=False
     c.save()
     user=request.user
-    conts=Content.objects.order_by("-created").all().filter(name=name,user=user)
+    cont=Content.objects.order_by("-created").all().filter(name=name,user=user)
+    conts=Content.objects.order_by("-created").all().filter(user=request.user)
     context={
+            "cont":cont,
             "conts":conts
         }
     return render(request,"single.html",context)
