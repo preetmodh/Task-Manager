@@ -4,3 +4,4 @@ from .models import User,Content
 
 admin.site.register(User)
 admin.site.register(Content)
+#<!-- background-image:url( "{% static 'images\backg.png' %}")-->
