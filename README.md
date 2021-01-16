@@ -26,6 +26,7 @@ To visit website [Click Here](https://preetmodh.pythonanywhere.com/login)
    * django auth models
    * django user models
    * django contib models
+   * django-online-users
    * django urls
    * django templates
    * django sqlite3
