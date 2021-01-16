@@ -3,7 +3,7 @@ A to-do web based application created using django where user can create account
 To visit website [Click Here](https://preetmodh.pythonanywhere.com/login)
 ## Requirements:
 * Python Installed
-* Istall all packages from requirements.txt.
+* Install all packages from requirements.txt.
 ## Process:
 1. Clone this project on your local system
 2. Open terminal
