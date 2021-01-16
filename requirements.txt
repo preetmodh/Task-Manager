@@ -1,0 +1,15 @@
+appdirs==1.4.4
+asgiref==3.3.1
+autopep8==1.5.4
+distlib==0.3.1
+Django==3.1.4
+django-online-users==0.3
+djangorestframework==3.12.2
+filelock==3.0.12
+numpy==1.19.5
+pycodestyle==2.6.0
+pytz==2020.4
+six==1.15.0
+sqlparse==0.4.1
+toml==0.10.2
+virtualenv==20.2.2
