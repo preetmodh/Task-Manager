@@ -2,8 +2,8 @@
 A to-do web based application created using django where user can create account and login to create their own to-do lists.\
 To visit website [Click Here](https://preetmodh.pythonanywhere.com/login)
 ## Requirements:
-* Python Intsalled
-* Django(ver=2.2) installed
+* Python Installed
+* Istall all packages from requirements.txt.
 ## Process:
 1. Clone this project on your local system
 2. Open terminal
