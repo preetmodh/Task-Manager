@@ -10,7 +10,7 @@ import json
 
 def index(request):
 
-    # Authenticated users view their diary
+    # Authenticated users view their lists
     if request.user.is_authenticated:
         conts=Content.objects.order_by("-created").all().filter(user=request.user)
         context={
@@ -82,7 +82,7 @@ def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse("index"))
 
-# for new diary
+# for new list
 @csrf_exempt
 @login_required
 def new_list(request):
